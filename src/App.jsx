@@ -5,6 +5,7 @@ import {
   Loader2, LogIn, LogOut, FolderOpen,
 } from 'lucide-react';
 import * as drive from './drive.js';
+import { SHARED_FOLDER_ID } from './config.js';
 
 const DEPARTMENTS = ['الموارد البشرية', 'المالية', 'تقنية المعلومات', 'المبيعات', 'التسويق', 'العمليات', 'الإدارة', 'أخرى'];
 const FOLDER_KEY = 'archive_folder_id';
@@ -29,6 +30,7 @@ export default function App() {
   const [authReady, setAuthReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [folder, setFolder] = useState(() => {
+    if (SHARED_FOLDER_ID) return { id: SHARED_FOLDER_ID, name: 'الأرشيف المشترك' };
     const id = localStorage.getItem(FOLDER_KEY);
     const name = localStorage.getItem(FOLDER_NAME_KEY);
     return id ? { id, name } : null;
